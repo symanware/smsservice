@@ -1,5 +1,6 @@
 package com.example.sms.controller;
 
+import com.example.sms.exception.ResourceNotCreatedException;
 import com.example.sms.exception.ResourceNotFoundException;
 import com.example.sms.model.SmsMessage;
 import com.example.sms.model.SmsRequest;
@@ -24,7 +25,7 @@ public class SmsController {
     public ResponseEntity<Map<String,Object>> sendMessage(@Valid @RequestBody SmsRequest request) {
         SmsMessage message = smsService.sendSmsMessage(request);
         if(message == null)
-            ResponseEntity.badRequest().build();
+            throw new ResourceNotCreatedException("Resource not created");
 
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("messageId",message.getId(),"status", message.getStatus().name()));
     }

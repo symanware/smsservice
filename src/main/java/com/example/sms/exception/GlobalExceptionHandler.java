@@ -43,6 +43,18 @@ public class GlobalExceptionHandler {
         return message;
     }
 
+    @ExceptionHandler(ResourceNotCreatedException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public ErrorMessage resourceNotCreatedException(ResourceNotCreatedException ex, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                new Date(),
+                new ArrayList<>(Collections.singletonList(ex.getMessage())),
+                request.getDescription(false));
+
+        return message;
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorMessage globalExceptionHandler(Exception ex, WebRequest request) {
