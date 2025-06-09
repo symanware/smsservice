@@ -41,7 +41,7 @@ Opt-Out phoneNumber:
 
 ### Clone the Repository
 
-    clone https://github.com/your-username/sms.git
+    clone https://github.com/symanware/smsservice.git
     cd sms
 
     Build the Project
